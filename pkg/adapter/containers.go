@@ -573,10 +573,17 @@ func (r *LocalRuntime) Checkpoint(c *cliconfig.CheckpointValues) error {
 		TCPEstablished: c.TcpEstablished,
 		TargetFile:     c.Export,
 		IgnoreRootfs:   c.IgnoreRootfs,
+		IgnoreVolumes:  c.IgnoreVolumes,
 	}
+
 	if c.Export == "" && c.IgnoreRootfs {
 		return errors.Errorf("--ignore-rootfs can only be used with --export")
 	}
+
+	if c.Export == "" && c.IgnoreVolumes {
+		return errors.Errorf("--ignore-volumes can only be used with --export")
+	}
+
 	if c.All {
 		containers, err = r.Runtime.GetRunningContainers()
 	} else {
@@ -624,7 +631,7 @@ func (r *LocalRuntime) Restore(ctx context.Context, c *cliconfig.RestoreValues) 
 
 	switch {
 	case c.Import != "":
-		containers, err = crImportCheckpoint(ctx, r.Runtime, c.Import, c.Name)
+		containers, err = crImportCheckpoint(ctx, r.Runtime, c.Import, c.Name, c.IgnoreVolumes)
 	case c.All:
 		containers, err = r.GetContainers(filterFuncs...)
 	default:

@@ -100,6 +100,7 @@ type CheckpointValues struct {
 	Latest         bool
 	Export         string
 	IgnoreRootfs   bool
+	IgnoreVolumes  bool
 }
 
 type CommitValues struct {
@@ -487,6 +488,7 @@ type RestoreValues struct {
 	IgnoreRootfs    bool
 	IgnoreStaticIP  bool
 	IgnoreStaticMAC bool
+	IgnoreVolumes   bool
 }
 
 type RmValues struct {

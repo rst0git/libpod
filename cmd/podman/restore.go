@@ -48,6 +48,7 @@ func init() {
 	flags.BoolVar(&restoreCommand.IgnoreRootfs, "ignore-rootfs", false, "Do not apply root file-system changes when importing from exported checkpoint")
 	flags.BoolVar(&restoreCommand.IgnoreStaticIP, "ignore-static-ip", false, "Ignore IP address set via --static-ip")
 	flags.BoolVar(&restoreCommand.IgnoreStaticMAC, "ignore-static-mac", false, "Ignore MAC address set via --mac-address")
+	flags.BoolVar(&restoreCommand.IgnoreVolumes, "ignore-volumes", false, "Do not restore content of volumes associated with container")
 
 	markFlagHiddenForRemoteClient("latest", flags)
 }
@@ -65,6 +66,10 @@ func restoreCmd(c *cliconfig.RestoreValues, cmd *cobra.Command) error {
 
 	if c.Import == "" && c.IgnoreRootfs {
 		return errors.Errorf("--ignore-rootfs can only be used with --import")
+	}
+
+	if c.Import == "" && c.IgnoreVolumes {
+		return errors.Errorf("--ignore-volumes can only be used with --import")
 	}
 
 	if c.Import == "" && c.Name != "" {

@@ -52,6 +52,13 @@ exported to a tar.gz file it is possible with the help of **--ignore-rootfs**
 to explicitly disable including changes to the root file-system into
 the checkpoint archive file.
 
+**ignore-volumes**
+
+This only works in combination with **--export, -e**. If a checkpoint is
+exported to a tar.gz file it is possible with the help of **--ignore-volumes**
+to explicitly disable including the content of volumes associated with container
+into the checkpoint archive file.
+
 ## EXAMPLE
 
 podman container checkpoint mywebserver

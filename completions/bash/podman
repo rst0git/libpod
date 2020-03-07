@@ -763,6 +763,7 @@ _podman_container_checkpoint() {
      --leave-running
      --tcp-established
      --ignore-rootfs
+     --ignore-volumes
      "
      case "$prev" in
         -e|--export)
@@ -878,6 +879,7 @@ _podman_container_restore() {
 	  --ignore-rootfs
 	  --ignore-static-ip
 	  --ignore-static-mac
+	  --ignore-volumes
      "
      case "$prev" in
         -i|--import)

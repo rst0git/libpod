@@ -47,6 +47,7 @@ func init() {
 	flags.BoolVarP(&checkpointCommand.Latest, "latest", "l", false, "Act on the latest container podman is aware of")
 	flags.StringVarP(&checkpointCommand.Export, "export", "e", "", "Export the checkpoint image to a tar.gz")
 	flags.BoolVar(&checkpointCommand.IgnoreRootfs, "ignore-rootfs", false, "Do not include root file-system changes when exporting")
+	flags.BoolVar(&checkpointCommand.IgnoreVolumes, "ignore-volumes", false, "Do not export the volumes associated with the container")
 	markFlagHiddenForRemoteClient("latest", flags)
 }
 
